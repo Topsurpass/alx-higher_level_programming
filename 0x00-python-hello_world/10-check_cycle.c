@@ -11,6 +11,9 @@ int check_cycle(listint_t *head)
 {
 	listint_t *prev, *fwrd;
 
+	if (head == NULL)
+		return (0);
+
 	prev = fwrd = head;
 
 	while (prev != NULL && fwrd != NULL)
