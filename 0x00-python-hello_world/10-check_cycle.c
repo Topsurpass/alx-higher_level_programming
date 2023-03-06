@@ -16,13 +16,17 @@ int check_cycle(listint_t *head)
 
 	prev = fwrd = head;
 
-	while (prev != NULL && fwrd != NULL)
+	while (1)
 	{
-		prev = prev->next;
-		fwrd = fwrd->next->next;
+		if (fwrd->next != NULL && fwrd->next->next != NULL)
+		{
+			fwrd = fwrd->next->next;
+			prev = prev->next;
+			if (prev == fwrd)
+				return (1);
+		}
+		else
+			return (0);
 
-		if (prev == fwrd)
-			return (1);
 	}
-	return (0);
 }
