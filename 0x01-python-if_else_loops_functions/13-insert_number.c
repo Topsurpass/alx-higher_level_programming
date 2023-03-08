@@ -17,12 +17,14 @@ listint_t *insert_node(listint_t **head, int number)
 		return (NULL);
 	new->n = number;
 	new->next = NULL;
+	/* if no singly linked list available */
 	if (*head == NULL)
 	{
 		*head = new;
 		(*head)->next = NULL;
 		return (new);
 	}
+	/* if there's just one node in the singly linked list */
 	if ((*head)->next == NULL)
 	{
 		if (new->n < (*head)->n)
@@ -37,12 +39,14 @@ listint_t *insert_node(listint_t **head, int number)
 	temp = *head;
 	while (temp->next != NULL)
 	{
+		/* if the first node value is > the new node value */
 		if (new->n < temp->n)
 		{
 			new->next = temp;
 			*head = new;
 			return (new);
 		}
+		/* if the new node value > current existing node but < next existing node */
 		if (((new->n > temp->n) && (new->n < (temp->next)->n)) ||
 				(new->n == temp->n))
 		{
