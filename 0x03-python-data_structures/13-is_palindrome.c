@@ -54,7 +54,6 @@ int compare_arr(int *arr1, int *arr2, int len)
 int is_palindrome(listint_t **head)
 {
 	listint_t *current;
-	/*int i, j, *arr1, *arr2, len;*/
 	int i, j, arr1[10240], arr2[10240], len;
 
 	/* if linked list is empty */
@@ -65,10 +64,6 @@ int is_palindrome(listint_t **head)
 		return (0);
 
 	len = listint_size(*head);
-	/*arr1 = malloc(sizeof(int) * len);
-	if (arr1 == NULL)
-		return (0);*/
-
 	current = *head;
 
 	/* loop through the linked list and save each value of n in an array */
@@ -79,12 +74,6 @@ int is_palindrome(listint_t **head)
 		current = current->next;
 		i++;
 	}
-	/*arr2 = malloc(sizeof(int) * len);
-	if (arr2 == NULL)
-	{
-		free(arr1);
-		return (0);
-	}*/
 	/* loop through the arr1 from the end and save in arr2 */
 	for (j = 0; j < len; j++)
 		arr2[j] = arr1[len - 1 - j];
