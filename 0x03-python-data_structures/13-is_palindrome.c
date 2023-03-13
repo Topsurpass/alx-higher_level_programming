@@ -64,6 +64,8 @@ int is_palindrome(listint_t **head)
 		return (0);
 
 	len = listint_size(*head);
+	if (len == 0)
+		return (1);
 	arr1 = malloc(sizeof(int) * len);
 	if (arr1 == NULL)
 		return (0);
