@@ -9,6 +9,7 @@
 int is_palindrome(listint_t **head)
 {
 	listint_t *temp;
+
 	temp = *head;
 	int len = 0, i = 0;
 	int data[12000];
@@ -35,7 +36,7 @@ int is_palindrome(listint_t **head)
 		temp = temp->next;
 	}
 	/* loop d array and compare 1st half of the arr length to 2nd half */
-	for (i = 0; i <= (len/2); i++)
+	for (i = 0; i <= (len / 2); i++)
 	{
 		if (data[i] != data[len - i - 1])
 			return (0);
