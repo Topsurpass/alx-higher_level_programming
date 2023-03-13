@@ -1,98 +1,44 @@
 #include "lists.h"
 
 /**
- * listint_size - get the length of the singly linked list
- * @h: the head node of the linked list
+ * is_palindrome - check if singly linked list is a palindrome
+ * @head: pointer to head of singly linked list
  *
- * Return: the length of the singly linked list
- */
-int listint_size(const listint_t *h)
-{
-	const listint_t *current;
-	int count = 0;
-
-	current = h;
-
-	while (current != NULL)
-	{
-		current = current->next;
-		count++;
-	}
-	return (count);
-}
-/**
- * compare_arr - compare 2 arrays of int to check if the same
- * @arr1: the first array
- * @arr2: the second array
- * @len: length of arr1
- *
- * Return: 0 if not the same and 1 if the same
- */
-int compare_arr(int *arr1, int *arr2, int len)
-{
-	int i, equal;
-
-	equal = 1;
-
-	for (i = 0; i < len; i++)
-	{
-		if (arr1[i] != arr2[i])
-		{
-			equal = 0;
-			break;
-		}
-	}
-	return (equal);
-}
-
-/**
- * is_palindrome - check if linked list is palidrome
- * @head: head node of the linked list
- *
- * Return: 0 if not a palindrome and 1 if palindrome
+ * Return: 0 if not, 1 if palindrome
  */
 int is_palindrome(listint_t **head)
 {
-	listint_t *current;
-	/*int i, j, *arr1, *arr2, len;*/
-	int i, j, *arr1, len;
+	listint_t *temp;
+	temp = *head;
+	int len = 0, i = 0;
+	int data[12000];
 
-	/* if linked list is empty */
-	if (*head == NULL)
-		return (1);
-	/* if linked list does not exist */
 	if (head == NULL)
 		return (0);
 
-	len = listint_size(*head);
-	arr1 = malloc(sizeof(int) * len);
-	if (arr1 == NULL)
-		return (0);
+	if (*head == NULL)
+		return (1);
 
-	current = *head;
-
-	/* loop through the linked list and save each value of n in an array */
-	i = 0;
-	while (current != NULL)
+	while (temp != NULL)
 	{
-		arr1[i] = current->n;
-		current = current->next;
-		i++;
+		temp = temp->next;
+		len += 1;
 	}
-	/*arr2 = malloc(sizeof(int) * len);
-	if (arr2 == NULL)
-	{
-		free(arr1);
-		return (0);
-	}*/
+	if (len == 1)
+		return (1);
 
-	/* loop through the arr1 from the end and save in arr2 */
-	for (j = 0; j <= (len / 2); j++)
+	temp = *head;
+	/* loop linked list and add its value in an array */
+	while (temp)
 	{
-		if (arr1[j] != arr1[len - j -1])
+		data[i++] = temp->n;
+		temp = temp->next;
+	}
+	/* loop d array and compare 1st half of the arr length to 2nd half */
+	for (i = 0; i <= (len/2); i++)
+	{
+		if (data[i] != data[len - i - 1])
 			return (0);
 	}
 	return (1);
-		/*arr2[j] = arr1[len - 1 - j];*/
-	/*return (compare_arr(arr1, arr2, len));*/
 }
