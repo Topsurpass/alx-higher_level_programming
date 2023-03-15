@@ -43,7 +43,6 @@ void print_python_list(PyObject *p)
 void print_python_bytes(PyObject *p)
 {
 	unsigned char i, size;
-	const char *type;
 
 	PyBytesObject *bytes = NULL;
 	PyVarObject *var = (PyVarObject *)p;
