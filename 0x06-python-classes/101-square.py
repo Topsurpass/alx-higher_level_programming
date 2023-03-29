@@ -117,3 +117,22 @@ class Square:
                 " " * self.__position[0] + "#" * self.__size
                 for rows in range(self.__size)
                 ]))
+
+    def __str__(self):
+        """
+        String representation of object / instance of the class
+
+        Example: print(my_square) which is an instance of the class defined
+        """
+
+        string = ""
+        if self.__size == 0:
+            return string
+
+        string += "\n" * self.position[1]
+        string += "\n".join([
+            " " * self.__position[0] + "#" * self.__size
+            for rows in range(self.__size)
+            ])
+
+        return string
