@@ -44,26 +44,26 @@ class Square:
         return self.__size
 
     @size.setter
-    def size(self, new_size):
+    def size(self, value):
         """
         setter method
 
         Args:
-            new_size: The new size
+            value: The new value for square size
 
         Raises:
             TypeError: if size is not an integer
             ValueError: if size is less than 0 i.e negavive
 
         """
-        if type(new_size) != int:
+        if type(value) is not int:
             raise TypeError("size must be an integer")
 
-        elif new_size < 0:
+        elif value < 0:
             raise ValueError("size must be >= 0")
 
         else:
-            self.__size = new_size
+            self.__size = value
 
     @property
     def position(self):
@@ -76,26 +76,26 @@ class Square:
         return self.__position
 
     @position.setter
-    def position(self, nw_positn):
+    def position(self, value):
         """
         setter method
 
         Args:
-            nw_positn: The new position turple
+            value: The new position turple
 
         Raises:
             TypeError: If the turple is not of 2 integers
 
         """
-        if len(nw_positn) < 2 or type(nw_positn) != tuple:
+        if len(value) != 2 or type(value) is not tuple:
             raise TypeError("position must be a tuple of 2 positive integers")
         else:
-            for i in nw_positn:
-                if type(i) != int or i < 0:
+            for i in value:
+                if type(i) is not int or i < 0:
                     raise TypeError("position must be a tuple of 2\
                             positive integers")
                     break
-            self.__position = nw_positn
+            self.__position = value
 
     def area(self):
         """Computes the area of the square by raising size to power of 2
@@ -104,7 +104,7 @@ class Square:
             The area of the square
 
          """
-        return (self.__size**2)
+        return (self.__size)**2
 
     def my_print(self):
         """Print to stdout the square with character # and with spaces"""
