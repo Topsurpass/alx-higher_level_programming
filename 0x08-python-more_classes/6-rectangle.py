@@ -6,6 +6,7 @@ private attribute width
 
 """
 
+
 class Rectangle:
     """This class defines a rectangle
 

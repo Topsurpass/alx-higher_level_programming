@@ -6,6 +6,7 @@ private attribute width
 
 """
 
+
 class Rectangle:
     """This class defines a rectangle
 
@@ -106,8 +107,8 @@ class Rectangle:
         """This prints the rectangle"""
         if self.__width == 0 or self.__height == 0:
             return ""
-        display = '\n'.join\
-                ([str(self.print_symbol) * self.__width for i in range(self.__height)])
+        display = '\n'.join([str(self.print_symbol) * self.__width
+                            for i in range(self.__height)])
         return display
 
     def __repr__(self):
