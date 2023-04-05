@@ -13,7 +13,7 @@ def lazy_matrix_mul(m_a, m_b):
     Args:
         m_a: matrix a
         m_b: matrix b
-    Returns:
-        result of the multiplication
+
+    Return: Product of the 2 matrices
     """
     return np.matmul(m_a, m_b)
