@@ -80,3 +80,8 @@ Below are several success and failed Test cases for the functions:
 	>>> add_integer(None, None)
 	Traceback (most recent call last):
 	TypeError: a must be an integer
+	
+	Test for special NaN in python (not a number)
+	>>> print(add_integer(float("NaN")))
+	Traceback (most recent call last):
+	ValueError: cannot convert float NaN to integer

@@ -27,7 +27,10 @@ def matrix_divided(matrix, div):
     err = "matrix must be a matrix (list of lists) of integers/floats"
     err2 = "Each row of the matrix must have the same size"
 
-    if isinstance(div, int) and div != 0 and isinstance(matrix, list) and \
+    if div == float("inf"):
+        return [[0.0] * len(row) for row in matrix]
+
+    if isinstance(div, data) and div != 0 and isinstance(matrix, list) and \
             len(matrix) != 0:
 
         length = len(matrix[0])
@@ -43,8 +46,7 @@ def matrix_divided(matrix, div):
                     for i in row:
                         if not isinstance(i, data):
                             raise TypeError(err)
-
-        return [[round(i/3, 2) for i in row] for row in matrix]
+        return [[round(i/div, 2) for i in row] for row in matrix]
 
     elif not isinstance(div, data):
         raise TypeError("div must be a number")
