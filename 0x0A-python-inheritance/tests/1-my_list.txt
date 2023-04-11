@@ -1,0 +1,72 @@
+`MyList class`
+==============
+This file contains the test cases for the class MyList
+To use this class, you must first import the method method
+
+>>> MyList = __import__('1-my_list').MyList
+
+Now, you can make use of the the method. Below are the test cases on how the method can be used and the result it produces
+
+     Test with integers
+     -------------------
+     >>> my_list = MyList()
+     >>> my_list.append(1)
+     >>> my_list.append(4)
+     >>> my_list.append(2)
+     >>> my_list.append(3)
+     >>> my_list.append(5)
+     >>> my_list.append(7)
+     >>> my_list.append(-27)
+     >>> print(my_list)
+     [1, 4, 2, 3, 5, 7, -27]
+     >>> my_list.print_sorted()
+     [-27, 1, 2, 3, 4, 5, 7]
+     >>> print(my_list)
+     [1, 4, 2, 3, 5, 7, -27]
+
+     Test both id values
+     -------------------
+     >>> _list = MyList()
+     >>> _list.append(-30)
+     >>> _list.append(50)
+     >>> _list.append(-1)
+     >>> print(_list)
+     [-30, 50, -1]
+     >>> id(_list) is not id(_list.print_sorted())
+     [-30, -1, 50]
+     True
+
+     Test list with only one element:
+     >>> ano_list = MyList()
+     >>> ano_list.append(8345)
+     >>> print(ano_list)
+     [8345]
+     >>> ano_list.print_sorted()
+     [8345]
+     >>> print(ano_list)
+     [8345]
+
+     Test list with no elements:
+     --------------------------
+     >>> nul_list = MyList()
+     >>> print(nul_list)
+     []
+     >>> nul_list.print_sorted()
+     []
+
+     Test type, isinstance, issubclass:
+     ---------------------------------
+     >>> type(MyList())
+     <class '1-my_list.MyList'>
+
+     >>> isinstance(MyList, object)
+     True
+
+     >>> isinstance(MyList, list)
+     False
+
+     >>> issubclass(MyList, list)
+     True
+
+     >>> 'print_sorted' in dir(MyList)
+     True
