@@ -19,7 +19,7 @@ def add_attribute(obj, attr, value):
         TypeError
     """
 
-    if '__dict__' not in dir(obj):
-        raise TypeError("can't add mew attribute")
-    else:
+    if ('__dict__' in dir(obj)):
         setattr(obj, attr, value)
+    else:
+        raise TypeError("can't add mew attribute")
