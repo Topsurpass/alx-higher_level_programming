@@ -20,5 +20,5 @@ def pascal_triangle(n):
     tri_arr = [[1]]
     for rows in range(n-1):
         tri_arr.append([a+b for a, b
-                         in zip([0] + tri_arr-1], tri_arr[-1] + [0])])
+                         in zip([0] + tri_arr[-1], tri_arr[-1] + [0])])
     return tri_arr 
