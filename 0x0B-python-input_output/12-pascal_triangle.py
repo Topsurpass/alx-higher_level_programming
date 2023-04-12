@@ -12,11 +12,13 @@ def pascal_triangle(n):
     Args:
         n: length of the triangle
     """
-    arr = [[1]]
-    for row in range(n - 1):
-        j = [1]
-        for i in range(row):
-            j.append(arr[-1][i] + arr[-1][i + 1])
-        j.append(1)
-        arr.append(j)
-    return arr
+    if n <= 0:
+        return []
+    if n == 1:
+        return [[1]]
+
+    tri_arr = [[1]]
+    for rows in range(n-1):
+        tri_arr.append([a+b for a, b
+                         in zip([0] + tri_arr-1], tri_arr[-1] + [0])])
+    return tri_arr 
