@@ -14,11 +14,13 @@ def pascal_triangle(n):
     """
     if n <= 0:
         return []
-    if n == 1:
-        return [[1]]
-
-    tri_arr = [[1]]
-    for rows in range(n-1):
-        tri_arr.append(
-                [a+b for a, b in zip([0] + tri_arr[-1], tri_arr[-1] + [0])])
-    return tri_arr
+    else:
+        rows = [[1] for i in range(n)]
+        for i in range(1, n):
+            for j in range(i):
+                try:
+                    prev = rows[i - 1][j + 1]
+                except IndexError:
+                    prev = 0
+                rows[i].append(prev + rows[i-1][j])
+        return rows
