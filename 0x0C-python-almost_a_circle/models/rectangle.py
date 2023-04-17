@@ -102,10 +102,8 @@ class Rectangle(Base):
 
     def display(self):
         """Print the rectangle to stdout"""
-        for j in range(self.__y):
-            print(end="\n")
-        for i in range(self.__height):
-            print((" " * ((self.__x) - 1)), ("#" * self.__width))
+        print("\n" * self.__y + "\n".join(
+            " " * self.__x + "#" * self.__width for i in range(self.__height)))
 
     def __str__(self):
         """print the object as a string"""

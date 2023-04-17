@@ -52,7 +52,7 @@ class Base:
         deserializing Json string back to object
         """
         if json_string is None or len(json_string) == 0:
-            json_string = "[]"
+            return []
         else:
             return json.loads(json_string)
 
@@ -95,9 +95,9 @@ class Base:
         i.e convert dictionary back to instance
         """
         if cls.__name__ == "Rectangle":
-            dummy = cls(3, 4, 5)
+            dummy = cls(2, 2)
         if cls.__name__ == "Square":
-            dummy = cls(4, 3, 7)
+            dummy = cls(2)
         dummy.update(**dictionary)
         return dummy
 
