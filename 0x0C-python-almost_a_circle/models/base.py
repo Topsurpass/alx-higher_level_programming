@@ -42,7 +42,7 @@ class Base:
         list of dictionaries I.e serializing lists of dict
         """
         if list_dictionaries is None or len(list_dictionaries) == 0:
-            return "[]"
+            return '[]'
         else:
             return json.dumps(list_dictionaries)
 
@@ -52,7 +52,7 @@ class Base:
         deserializing Json string back to object
         """
         if json_string is None or len(json_string) == 0:
-            return []
+            json_string = "[]"
         else:
             return json.loads(json_string)
 
@@ -62,14 +62,13 @@ class Base:
         to a file
         """
         obj_arr = []
-        if list is not None:
+        if list_objs is not None:
             for obj in list_objs:
                 obj_arr.append(cls.to_dictionary(obj))
 
         my_file = cls.__name__ + ".json"
         with open(my_file, 'w', encoding="utf-8") as f:
-            serialized = cls.to_json_string(obj_arr)
-            f.write(serialized)
+            f.write(cls.to_json_string(obj_arr))
 
     @classmethod
     def load_from_file(cls):

@@ -49,7 +49,7 @@ class Square(Rectangle):
 
     def __str__(self):
         """Print instance in string"""
-        return "{} ({}) {}/{} - {}".format(
+        return "[{}] ({}) {}/{} - {}".format(
                 self.__class__.__name__, self.id,
                 self.x, self.y, self.width)
 

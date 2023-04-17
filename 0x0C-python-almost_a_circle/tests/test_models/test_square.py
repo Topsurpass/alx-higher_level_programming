@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 
 """
-This module contains test cases based on Rectangle class
+This module contains test cases based on Square class
 
 The tests can be run using these commands:
     python3 -m unittest discover tests
-    python3 -m unittest tests/test_models/test_rectangle.py
+    python3 -m unittest tests/test_models/test_square.py
 
 Below are several test cases on the class
 """
@@ -13,10 +13,10 @@ Below are several test cases on the class
 import unittest
 import pep8
 from io import StringIO
-from models import rectangle
+from models import square
 from contextlib import redirect_stdout
 
-Rectangle = rectangle.Rectangle
+Square = square.Square
 
 
 class TestPep8(unittest.TestCase):
@@ -24,34 +24,34 @@ class TestPep8(unittest.TestCase):
     def test_pep8(self):
         style = pep8.StyleGuide()
         num_err = 0
-        files = ["models/rectangle.py", "tests/test_models/test_rectangle.py"]
+        files = ["models/square.py", "tests/test_models/test_square.py"]
         num_err += style.check_files(files).total_errors
         self.assertEqual(num_err, 0, 'Wrong Pep8 style, adjust your code !')
 
 
-class TestRectangle(unittest.TestCase):
-    """Several test cases for the rectangle class"""
+class TestSquare(unittest.TestCase):
+    """Several test cases for the square class"""
 
     def setUp(self):
         """For dictionary conversion"""
-        self.r_dict = Rectangle(2, 3, 4, 5, 6)
+        self.r_dict = Square(2, 3, 4, 5)
 
     def test_orderly_inpt_val(self):
         """Test input if correctly in order"""
-        r1 = Rectangle(3, 2, 60, 10, 6)
+        r1 = Square(3, 2, 60, 10)
 
         self.assertEqual(r1.width, 3)
-        self.assertEqual(r1.height, 2)
-        self.assertEqual(r1.x, 60)
-        self.assertEqual(r1.y, 10)
-        self.assertEqual(r1.id, 6)
+        self.assertEqual(r1.height, 3)
+        self.assertEqual(r1.x, 2)
+        self.assertEqual(r1.y, 60)
+        self.assertEqual(r1.id, 10)
 
     def test_default_val(self):
         """Test default values"""
-        r2 = Rectangle(5, 4)
+        r2 = Square(5, 0, 0, 1)
 
         self.assertEqual(r2.width, 5)
-        self.assertEqual(r2.height, 4)
+        self.assertEqual(r2.height, 5)
         self.assertEqual(r2.x, 0)
         self.assertEqual(r2.y, 0)
         self.assertEqual(r2.id, 1)
@@ -60,58 +60,52 @@ class TestRectangle(unittest.TestCase):
         """Test invalid inputs"""
 
         with self.assertRaisesRegex(TypeError, "width must be an integer"):
-            Rectangle([2, 3], 3, 5, 3)
-            Rectangle("20", 3, 3, 5)
+            Square([2, 3], 3, 5, 3)
+            Square("20", 3, 3, 5)
 
         with self.assertRaisesRegex(ValueError, "width must be > 0"):
-            Rectangle(-18, 4, 5, 3)
-            Rectangle(0, 5, 6, 3)
-
-        with self.assertRaisesRegex(TypeError, "height must be an integer"):
-            Rectangle(9, "4")
-            Rectangle(3, (3,), 4, 6)
-
-        with self.assertRaisesRegex(ValueError, "height must be > 0"):
-            Rectangle(2, -4, 5, 6, 3)
-            Rectangle(6, 0, 6, 3)
+            Square(-18, 4, 5, 3)
+            Square(0, 5, 6, 3)
 
         with self.assertRaisesRegex(TypeError, "x must be an integer"):
-            Rectangle(3, 4, (3, 4))
+            Square(9, "4")
+            Square(3, (3,), 4, 6)
 
         with self.assertRaisesRegex(ValueError, "x must be >= 0"):
-            Rectangle(2, 4, -5, 6, 3)
+            Square(2, -4, 5, 6)
+            Square(6, 0, 6, 3)
 
         with self.assertRaisesRegex(TypeError, "y must be an integer"):
-            Rectangle(3, 4, 18, (7, 4))
+            Square(3, 4, (3, 4))
 
         with self.assertRaisesRegex(ValueError, "y must be >= 0"):
-            Rectangle(2, 4, 5, -6, 3)
+            Square(2, 4, -5, 6)
 
     def test_priv_attr(self):
         """Test if attributes are private"""
 
         with self.assertRaises(AttributeError):
-            print(Rectangle.width)
-            print(Rectangle.height)
-            print(Rectangle.x)
-            print(Rectangle.y)
-            print(Rectangle.__width)
-            print(Rectangle.__height)
-            print(Rectangle.__x)
-            print(Rectangle.__y)
+            print(Square.width)
+            print(Square.height)
+            print(Square.x)
+            print(Square.y)
+            print(Square.__width)
+            print(Square.__height)
+            print(Square.__x)
+            print(Square.__y)
 
     def test_over_under_args(self):
         """Test for over and under arguments supplied"""
 
         with self.assertRaises(TypeError):
-            Rectangle(1, 2, 3, 4, 5, 2, 3, 5, 6, 7)
-            Rectangle()
-            Rectangle(1)
+            Square(1, 2, 3, 4, 5, 2, 3, 5, 6, 7)
+            Square()
+            Square(1)
 
     def test_to_dictionary(self):
         """Test to confirm dictionary"""
 
-        dic = {"width": 2, "height": 3, "x": 4, "y": 5, "id": 6}
+        dic = {"size": 2, "x": 3, "y": 4, "id": 5}
         my_type = self.r_dict.to_dictionary()
         self.assertEqual(my_type, dic)
         self.assertTrue(isinstance(my_type, dict))
@@ -120,21 +114,21 @@ class TestRectangle(unittest.TestCase):
         """Test object conversion to strig"""
 
         a = str(self.r_dict)
-        strng = "[Rectangle] (6) 4/5 - 2/3"
+        strng = "[Square] (5) 3/4 - 2"
         self.assertEqual(a, strng)
         self.assertEqual(type(a), str)
 
     def test_display(self):
         """Check if stdout display is equal"""
 
-        check = "\n\n\n\n\n    ##\n    ##\n    ##\n"
+        check = "\n\n\n\n   ##\n   ##\n"
         with StringIO() as buf, redirect_stdout(buf):
             self.r_dict.display()
             output = buf.getvalue()
         self.assertEqual(output, check)
 
-        check2 = "\n\n\n   ####\n   ####\n   ####\n   ####\n"
-        r4 = Rectangle(4, 4, 3, 3, 7)
+        check2 = "\n\n\n    ####\n    ####\n    ####\n    ####\n"
+        r4 = Square(4, 4, 3, 3)
         with StringIO() as buff, redirect_stdout(buff):
             r4.display()
             output_2 = buff.getvalue()
@@ -142,23 +136,21 @@ class TestRectangle(unittest.TestCase):
 
     def test_area(self):
         """Check if area is correct"""
-        self.assertEqual(self.r_dict.area(), 6)
+        self.assertEqual(self.r_dict.area(), 4)
 
     def test_update(self):
         """Test for updated attributes"""
         self.r_dict.update(3)
-        self.assertEqual(str(self.r_dict), "[Rectangle] (3) 4/5 - 2/3")
+        self.assertEqual(str(self.r_dict), "[Square] (3) 3/4 - 2")
         self.r_dict.update(3, 9)
-        self.assertEqual(str(self.r_dict), "[Rectangle] (3) 4/5 - 9/3")
+        self.assertEqual(str(self.r_dict), "[Square] (3) 3/4 - 9")
         self.r_dict.update(3, 9, 8)
-        self.assertEqual(str(self.r_dict), "[Rectangle] (3) 4/5 - 9/8")
+        self.assertEqual(str(self.r_dict), "[Square] (3) 8/4 - 9")
         self.r_dict.update(3, 9, 8, 11)
-        self.assertEqual(str(self.r_dict), "[Rectangle] (3) 11/5 - 9/8")
-        self.r_dict.update(3, 9, 8, 11, 1)
-        self.assertEqual(str(self.r_dict), "[Rectangle] (3) 11/1 - 9/8")
+        self.assertEqual(str(self.r_dict), "[Square] (3) 8/11 - 9")
 
         """Test for *kwargs"""
-        self.r_dict.update(height=33, width=209, id=10)
-        self.assertEqual(str(self.r_dict), "[Rectangle] (10) 11/1 - 209/33")
+        self.r_dict.update(size=33, x=209, id=10)
+        self.assertEqual(str(self.r_dict), "[Square] (10) 209/11 - 33")
         self.r_dict.update(x=303, y=400)
-        self.assertEqual(str(self.r_dict), "[Rectangle] (10) 303/400 - 209/33")
+        self.assertEqual(str(self.r_dict), "[Square] (10) 303/400 - 33")
