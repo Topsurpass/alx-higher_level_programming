@@ -48,7 +48,7 @@ class TestRectangle(unittest.TestCase):
 
     def test_default_val(self):
         """Test default values"""
-        r2 = Rectangle(5, 4)
+        r2 = Rectangle(5, 4, 0, 0, 1)
 
         self.assertEqual(r2.width, 5)
         self.assertEqual(r2.height, 4)

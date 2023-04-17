@@ -14,9 +14,9 @@ This project contains a review of everything about python which include:
 * args and kwargs
 * Serialization/Deserialization
 * JSON
-##Learning objectives
+## Learning objectives
 This project has satisfy the objectives such as knowing Unit testing and how to implement it in a large project, how to serialize and deserialize a Class, how to write and read a JSON file, what args and kwargs are and how to use them and finally how to handle named arguments in a function.
-##Requirements
+## Requirements
 
 * Editor: The editor used was vi
 * Files were interpreted / compilled on Ubuntu 20.04 LTS using python3

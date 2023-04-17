@@ -14,7 +14,6 @@ import csv
 import unittest
 import os
 import pep8
-from io import StringIO
 from models import base
 from models import rectangle
 
@@ -151,3 +150,10 @@ class TestPep8(unittest.TestCase):
             if i == 1:
                 self.assertEqual(
                         str(k), '[Rectangle] (110) 13/14 - 11/12')
+
+    def test_load_from_empty_file(self):
+        """Test load from empty file"""
+        Rectangle.save_to_file([])
+        frm_fil = Rectangle.load_from_file()
+        self.assertTrue(isinstance(frm_fil, list))
+        self.assertEqual(len(frm_fil), 0)
