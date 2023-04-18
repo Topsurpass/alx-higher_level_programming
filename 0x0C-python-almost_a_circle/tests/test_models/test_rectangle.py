@@ -66,6 +66,7 @@ class TestRectangle(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "width must be > 0"):
             Rectangle(-18, 4, 5, 3)
             Rectangle(0, 5, 6, 3)
+            Rectangle(0, 2)
 
         with self.assertRaisesRegex(TypeError, "height must be an integer"):
             Rectangle(9, "4")
@@ -74,6 +75,7 @@ class TestRectangle(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "height must be > 0"):
             Rectangle(2, -4, 5, 6, 3)
             Rectangle(6, 0, 6, 3)
+            Rectangle(1, 0)
 
         with self.assertRaisesRegex(TypeError, "x must be an integer"):
             Rectangle(3, 4, (3, 4))
@@ -139,6 +141,20 @@ class TestRectangle(unittest.TestCase):
             r4.display()
             output_2 = buff.getvalue()
         self.assertEqual(output_2, check2)
+
+        check3 = "##\n##\n"
+        r5 = Rectangle(2, 2)
+        with StringIO() as buff, redirect_stdout(buff):
+            r5.display()
+            output_3 = buff.getvalue()
+        self.assertEqual(output_3, check3)
+
+        check4 = "  ##\n  ##\n"
+        r6 = Rectangle(2, 2, 2)
+        with StringIO() as buff, redirect_stdout(buff):
+            r6.display()
+            output_4 = buff.getvalue()
+        self.assertEqual(output_4, check4)
 
     def test_area(self):
         """Check if area is correct"""

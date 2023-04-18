@@ -16,9 +16,11 @@ import os
 import pep8
 from models import base
 from models import rectangle
+from models import square
 
 Base = base.Base
 Rectangle = rectangle.Rectangle
+Square = square.Square
 
 
 class TestPep8(unittest.TestCase):
@@ -38,6 +40,7 @@ class TestPep8(unittest.TestCase):
         """Clean up after each test"""
         try:
             os.remove("Rectangle.json")
+            os.remove("Square.json")
 
         except FileNotFoundError:
             pass
@@ -45,9 +48,9 @@ class TestPep8(unittest.TestCase):
     def test_default_id(self):
         """Test default id value"""
         self.assertEqual(Base(1).id, 1)
-        self.assertEqual(Base().id, 2)
-        self.assertEqual(Base().id, 3)
-        self.assertEqual(Base().id, 4)
+        self.assertEqual(Base(2).id, 2)
+        self.assertEqual(Base(3).id, 3)
+        self.assertEqual(Base(4).id, 4)
         self.assertEqual(Base(89).id, 89)
 
     def test_over_attr(self):
@@ -108,6 +111,18 @@ class TestPep8(unittest.TestCase):
         self.assertEqual(str(r2), '[Rectangle] (10) 3/4 - 1/2')
         self.assertIsNot(r1, r2)
 
+        new = Square.create(**{'id': 89})
+        self.assertEqual(str(new), '[Square] (89) 0/0 - 2')
+
+        r = Square(**{'id': 89, 'size': 1})
+        self.assertEqual(str(r), '[Square] (89) 0/0 - 1')
+
+        r3 = Square(**{'id': 89, 'size': 1, 'x': 2})
+        self.assertEqual(str(r3), '[Square] (89) 2/0 - 1')
+
+        r4 = Square(**{'id': 89, 'size': 1, 'x': 2, 'y': 3})
+        self.assertEqual(str(r4), '[Square] (89) 2/3 - 1')
+
     def test_save_to_file(self):
         """Test save to json file"""
         r1 = Rectangle(1, 2, 3, 4, 10)
@@ -120,15 +135,25 @@ class TestPep8(unittest.TestCase):
                     json.dumps(
                         [r1.to_dictionary(), r2.to_dictionary()]))
 
+        Square.save_to_file([Square(1)])
+        with open("Square.json", "r") as f:
+            self.assertEqual(
+                    f.read(),
+                    json.dumps(
+                        [{"id": 5, "size": 1, "x": 0, "y": 0}]))
+
     def test_save_none_to_file(self):
         """Test save to file"""
         Rectangle.save_to_file(None)
+        Square.save_to_file(None)
+
         with open("Rectangle.json", "r") as f:
             self.assertEqual(f.read(), '[]')
 
     def test_save_empty_to_file(self):
         """Test save to file"""
         Rectangle.save_to_file([])
+        Square.save_to_file([])
         with open("Rectangle.json", "r") as f:
             self.assertEqual(f.read(), '[]')
 
@@ -137,8 +162,8 @@ class TestPep8(unittest.TestCase):
 
         r1 = Rectangle(1, 2, 3, 4, 10)
         r2 = Rectangle(11, 12, 13, 14, 110)
-        Rectangle.save_to_file([r1, r2])
 
+        Rectangle.save_to_file([r1, r2])
         frm_fil = Rectangle.load_from_file()
 
         self.assertEqual(len(frm_fil), 2)
@@ -150,6 +175,9 @@ class TestPep8(unittest.TestCase):
             if i == 1:
                 self.assertEqual(
                         str(k), '[Rectangle] (110) 13/14 - 11/12')
+
+        frm_sqr = Square.load_from_file()
+        self.assertEqual(len(frm_sqr), 0)
 
     def test_load_from_empty_file(self):
         """Test load from empty file"""

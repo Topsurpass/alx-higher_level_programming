@@ -46,15 +46,24 @@ class TestSquare(unittest.TestCase):
         self.assertEqual(r1.y, 60)
         self.assertEqual(r1.id, 10)
 
+    def test_default(self):
+        """Test default"""
+        r2 = Square(1)
+
+        self.assertEqual(r2.width, 1)
+        self.assertEqual(r2.height, 1)
+        self.assertEqual(r2.x, 0)
+        self.assertEqual(r2.y, 0)
+
     def test_default_val(self):
         """Test default values"""
-        r2 = Square(5, 0, 0, 1)
+        r2 = Square(5, 0, 0, 3)
 
         self.assertEqual(r2.width, 5)
         self.assertEqual(r2.height, 5)
         self.assertEqual(r2.x, 0)
         self.assertEqual(r2.y, 0)
-        self.assertEqual(r2.id, 1)
+        self.assertEqual(r2.id, 3)
 
     def test_wrong_input(self):
         """Test invalid inputs"""
@@ -66,6 +75,8 @@ class TestSquare(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "width must be > 0"):
             Square(-18, 4, 5, 3)
             Square(0, 5, 6, 3)
+            Square(-1)
+            Square(0)
 
         with self.assertRaisesRegex(TypeError, "x must be an integer"):
             Square(9, "4")
