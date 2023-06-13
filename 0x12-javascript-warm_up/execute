@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Get the current working directory
+directory=$(pwd)
+count=0;
+
+# Loop through all files in the directory
+for file in "$directory"/*; do
+    # Check if the file is a regular file and has not been modified in the last 24 hours
+    if [ -f "$file" ] && [ "$(stat -c %a "$file")" == "664" ] && [ "$(basename "$file")" != "README.md" ]; then
+        chmod 755 "$file"
+	((count=count+1)) 
+    fi
+done
+if [ $count == 0 ]; then
+	echo "No unmodified file"
+else
+	echo "$count files modified to chmod 755"
+fi
