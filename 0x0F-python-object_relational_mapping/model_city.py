@@ -4,11 +4,8 @@
 This module contains City class definition that maps the table cities
 in the data base
 """
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, ForeignKey
 from model_state import Base, State
-
-Base = declarative_base()
 
 
 class City(Base):
