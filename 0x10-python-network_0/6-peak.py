@@ -7,7 +7,7 @@ list of integers.
 
 def find_peak(list_of_integers):
     """Return number that is > the numbers both at its left and right side"""
-    
+
     if not list_of_integers:
         return None
     low, high = 0, len(list_of_integers) - 1
