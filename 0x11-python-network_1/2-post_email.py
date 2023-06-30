@@ -6,16 +6,18 @@ passed URL with the email as a parameter, and displays the body of the response
 (decoded in utf-8)
 """
 
-from urllib.request import Request, urlopen
-from urllib.parse import urlencode
+import urllib.request
+import urllib.parse
 from sys import argv
 
 
-values = {'email': argv[2]}
+if __name__ == "__main__":
 
-data = urlencode(values)
-data = data.encode('ascii')
-req = Request(argv[1], data)
-with urlopen(req) as response:
-    the_email = response.read().decode('utf-8')
-    print(the_email)
+    values = {'email': argv[2]}
+
+    data = urllib.parse.urlencode(values)
+    data = data.encode('ascii')
+    req = urllib.request.Request(argv[1], data)
+    with urllib.request.urlopen(req) as response:
+        the_email = response.read().decode('utf-8')
+        print(the_email)
