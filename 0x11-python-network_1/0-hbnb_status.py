@@ -1,15 +1,15 @@
 #!/usr/bin/python3
 """
-Script that fetch https://intranet.hbtn.io/status and display response
+script that fetches https://alx-intranet.hbtn.io/status
 """
 import urllib.request
 
 
 if __name__ == "__main__":
-    url = 'https://intranet.hbtn.io/status'
-    with urllib.request.urlopen(url) as r:
-        html = r.read()
-        print('Body response:')
-        print("\t- type: {}".format(type(html)))
-        print("\t- content: {}".format(html))
-        print("\t- utf8 content: {}".format(html.decode('utf-8')))
+    my_url = "https://alx-intranet.hbtn.io/status"
+    with urllib.request.urlopen(my_url) as response:
+        content = response.read()
+        print("Body response:")
+        print("\t- type:", type(content))
+        print("\t- content:", content)
+        print("\t- utf8 content:", content.decode('utf-8'))
