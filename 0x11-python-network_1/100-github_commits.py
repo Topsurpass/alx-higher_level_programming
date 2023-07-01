@@ -20,7 +20,9 @@ if __name__ == "__main__":
 
     r = requests.get(url)
     dic = r.json()
-
-    for i in range(10):
-        print("{}: {}".format(
-            dic[i]['sha'], dic[i]['commit']['author']['name']))
+    try:
+        for i in range(10):
+            print("{}: {}".format(
+                dic[i].get('sha'), dic[i].get('commit').get('author').get('name')))
+    except IndexError:
+        pass
