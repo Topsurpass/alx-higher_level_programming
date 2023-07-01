@@ -23,6 +23,7 @@ if __name__ == "__main__":
     try:
         for i in range(10):
             print("{}: {}".format(
-                dic[i].get('sha'), dic[i].get('commit').get('author').get('name')))
+                dic[i].get('sha'), dic[i].get('commit').get(
+                                                'author').get('name')))
     except IndexError:
         pass
